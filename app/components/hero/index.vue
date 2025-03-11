@@ -33,7 +33,7 @@ import Header from "./Header.vue";
             >
               <Icon name="ph:play-fill" class="w-4 h-4 text-white" />
             </div>
-            <span class="text-[#686D77]">Watch Demo</span>
+            <span class="text-[#686D77]">Watch Demo (Soon)</span>
           </button>
         </div>
       </div>
