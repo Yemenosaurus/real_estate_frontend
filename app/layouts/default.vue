@@ -15,59 +15,95 @@ const password = ref("a");
 const loginSuccess = ref(false);
 const router = useRouter();
 
+// Configuration d'axios pour inclure les credentials
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://127.0.0.1:8000';
+axios.defaults.headers.common['Accept'] = 'application/json';
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 async function handleLogin() {
   try {
-    await axios.get("http://127.0.0.1:8000/api/sanctum/csrf-cookie");
-    const loginResponse = await axios.post("http://127.0.0.1:8000/api/login", {
+    isLoading.value = true;
+    // Récupération du cookie CSRF
+    await axios.get("/sanctum/csrf-cookie");
+    
+    // Tentative de connexion
+    const loginResponse = await axios.post("/api/login", {
       email: email.value,
       password: password.value,
     });
-    console.log("Login successful:", loginResponse.data);
-    const userId = loginResponse.data.user.id;
-    localStorage.setItem("userId", userId);
-    const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${userId}`);
-    console.log("User data received:", userResponse.data);
-    loginSuccess.value = true;
-    isAuthenticated.value = true;
-    router.push('/');
+    
+    if (loginResponse.data.message === 'Login successful') {
+      // Stocker le token
+      const token = loginResponse.data.token;
+      localStorage.setItem('auth_token', token);
+      
+      // Configurer axios avec le token
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      
+      loginSuccess.value = true;
+      isAuthenticated.value = true;
+      await router.push('/');
+    }
   } catch (error) {
     console.error("Login failed:", error.response?.data);
+    loginSuccess.value = false;
+    isAuthenticated.value = false;
+  } finally {
+    isLoading.value = false;
   }
 }
 
 // Vérifier au montage si l'utilisateur est déjà connecté
 onMounted(async () => {
   isLoading.value = true;
-  const userId = localStorage.getItem("userId");
-  if (userId) {
-    try {
-      const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${userId}`);
-      console.log("User data received on mount:", userResponse.data);
+  try {
+    // Récupérer le token du localStorage
+    const token = localStorage.getItem('auth_token');
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    }
+
+    // Récupération du cookie CSRF
+    await axios.get("/sanctum/csrf-cookie");
+    
+    // Utilisation du endpoint /api/user protégé par Sanctum
+    const response = await axios.get('/api/user');
+    if (response.data) {
       isAuthenticated.value = true;
       if (window.location.pathname === '/login') {
-        router.push('/');
-      }
-    } catch (error) {
-      console.error("Session invalide ou expirée:", error);
-      isAuthenticated.value = false;
-      localStorage.removeItem("userId");
-      if (window.location.pathname !== '/login') {
-        router.push('/login');
+        await router.push('/');
       }
     }
-  } else {
+  } catch (error) {
+    console.error("Session invalide ou expirée:", error);
+    localStorage.removeItem('auth_token');
+    delete axios.defaults.headers.common['Authorization'];
+    isAuthenticated.value = false;
     if (window.location.pathname !== '/login') {
-      router.push('/login');
+      await router.push('/login');
     }
+  } finally {
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
   }
-  isLoading.value = false;
 });
 
 // Fonction de logout
-function logout() {
-  localStorage.removeItem("userId");
-  isAuthenticated.value = false;
-  router.push('/login');
+async function logout() {
+  try {
+    isLoading.value = true;
+    await axios.post('/api/logout');
+    localStorage.removeItem('auth_token');
+    delete axios.defaults.headers.common['Authorization'];
+    isAuthenticated.value = false;
+    await router.push('/login');
+  } catch (error) {
+    console.error("Erreur lors du logout:", error);
+  } finally {
+    isLoading.value = false;
+  }
 }
 
 // ------------------
@@ -178,7 +214,7 @@ const groups = [
 </script>
 
 <template>
-  <div>
+  <div v-cloak>
     <!-- Écran de chargement -->
     <template v-if="isLoading">
       <div class="flex items-center justify-center min-h-screen bg-gray-100">
@@ -306,3 +342,9 @@ const groups = [
     </template>
   </div>
 </template>
+
+<style>
+[v-cloak] {
+  display: none;
+}
+</style>
