@@ -3,7 +3,7 @@
         <div class="flex justify-center mb-6">
             <Logo class="w-32 h-32" />
         </div>
-        <form @submit.prevent="handleLogin">
+        <form @submit.prevent="$emit('login')">
             <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <input type="email" id="email" v-model="email"
@@ -27,31 +27,10 @@
 
 <script setup>
 definePageMeta({
-    layout: 'login'
+    layout: 'default'
 })
 
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import Logo from '~/components/global/Logo.vue'
-import axios from 'axios'
-
-const email = ref('')
-const password = ref('')
-const router = useRouter()
-
-async function handleLogin() {
-    try {
-        await axios.get('http://127.0.0.1:8000/api/sanctum/csrf-cookie')
-        const response = await axios.post('http://127.0.0.1:8000/api/login', {
-            email: email.value,
-            password: password.value
-        })
-        console.log('Login successful:', response.data)
-        router.push('/') // Redirige vers la page d'accueil après connexion réussie
-    } catch (error) {
-        console.error('Login failed:', error.response.data)
-    }
-}
 </script>
 
 <style scoped>
