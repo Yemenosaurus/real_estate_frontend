@@ -1,5 +1,5 @@
 <script setup>
-// Vous pouvez ajouter ici la logique nécessaire
+
 </script>
 
 <template>
