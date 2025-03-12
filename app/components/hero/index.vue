@@ -5,7 +5,7 @@ import Header from "./Header.vue";
 <template>
   <div class="relative">
     <Header />
-    <section class="w-full grid grid-cols-1 md:grid-cols-2 items-center p-5 sm:p-20 my-2">
+    <section class="w-full grid grid-cols-1 md:grid-cols-2 items-center p-5 sm:p-20 my-2 mt-[50px]">
       <div class="space-y-3">
         <p class="uppercase font-poppins text-sm text-[#DF6951] font-bold">
           Tailored Solutions for Every Need
@@ -37,12 +37,10 @@ import Header from "./Header.vue";
           </button>
         </div>
       </div>
-      <nuxt-picture
-        src="https://images.unsplash.com/photo-1527631746610-bca00a040d60"
-        alt="Happy traveler"
+      <img
+        src="@/assets/images/header.png"
+        alt="Property header image"
         class="w-full h-auto object-cover rounded-lg"
-        width="600"
-        height="800"
       />
     </section>
   </div>

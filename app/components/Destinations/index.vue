@@ -13,45 +13,39 @@
     <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
       <!-- Particulier -->
       <div class="rounded-2xl overflow-hidden shadow-lg">
-        <nuxt-picture
-          src="https://images.unsplash.com/photo-1552832230-c0197dd311b5"
-          alt="For Individuals"
-          class="w-full h-64 object-cover"
-        />
+        <img src="@/assets/images/individual.png" alt="Property header image"
+          class="w-full h-auto object-cover rounded-lg" />
         <div class="p-4">
           <h3 class="font-bold">For Individuals</h3>
           <p class="text-gray-600">
-            Personalized services tailored to meet the unique needs of individuals seeking property inspections and evaluations.
+            Personalized services tailored to meet the unique needs of individuals seeking property inspections and
+            evaluations.
           </p>
         </div>
       </div>
 
       <!-- Agence -->
       <div class="rounded-2xl overflow-hidden shadow-lg">
-        <nuxt-picture
-          src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad"
-          alt="For Agencies"
-          class="w-full h-64 object-cover"
-        />
+        <img src="@/assets/images/agency.png" alt="Property header image"
+          class="w-full h-auto object-cover rounded-lg" />
         <div class="p-4">
           <h3 class="font-bold">For Agencies</h3>
           <p class="text-gray-600">
-            Comprehensive solutions designed for real estate agencies to streamline property assessments and client interactions.
+            Comprehensive solutions designed for real estate agencies to streamline property assessments and client
+            interactions.
           </p>
         </div>
       </div>
 
       <!-- Investisseur -->
       <div class="rounded-2xl overflow-hidden shadow-lg">
-        <nuxt-picture
-          src="https://images.unsplash.com/photo-1559504706-2c2b8c64494c"
-          alt="For Investors"
-          class="w-full h-64 object-cover"
-        />
+        <img src="@/assets/images/investor.png" alt="Property header image"
+          class="w-full h-auto object-cover rounded-lg" />
         <div class="p-4">
           <h3 class="font-bold">For Investors</h3>
           <p class="text-gray-600">
-            Strategic insights and detailed evaluations to support investors in making informed property investment decisions.
+            Strategic insights and detailed evaluations to support investors in making informed property investment
+            decisions.
           </p>
         </div>
       </div>
@@ -61,4 +55,4 @@
 
 <style scoped>
 /* Styles spécifiques aux destinations */
-</style> 
+</style>

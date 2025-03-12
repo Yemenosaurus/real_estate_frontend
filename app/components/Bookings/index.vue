@@ -56,11 +56,8 @@
         </div>
       </div>
       <div class="relative">
-        <nuxt-picture
-          src="/images/mobile-app.png"
-          alt="Mobile App"
-          class="w-full h-auto object-cover"
-        />
+        <img src="@/assets/images/booking.png" alt="Property header image"
+          class="w-full h-auto object-cover rounded-lg" />
       </div>
     </div>
   </section>
