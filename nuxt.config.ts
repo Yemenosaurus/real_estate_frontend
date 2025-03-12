@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  extends: ["@nuxt/ui-pro"],
+  extends: [],
 
   modules: [
     "@nuxt/ui",

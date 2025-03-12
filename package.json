@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-ui-pro-template-dashboard",
+  "name": "real-estate-backend",
   "private": true,
   "type": "module",
   "scripts": {
@@ -16,7 +16,7 @@
     "@nuxt/fonts": "^0.11.0",
     "@nuxt/image": "^1.9.0",
     "@nuxt/ui": "^2.20.0",
-    "@nuxt/ui-pro": "^1.6.0",
+    "@nuxthq/ui": "^2.7.0",
     "@vueuse/nuxt": "^12.2.0",
     "axios": "^1.7.9",
     "date-fns": "^4.1.0",
