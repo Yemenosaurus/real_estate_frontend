@@ -14,7 +14,7 @@
           <!-- Step 1: Easy Identification -->
           <div class="flex items-start space-x-5">
             <div
-              class="shrink-0 w-12 h-12 rounded-xl bg-[#F0BB1F] grid place-items-center"
+              class="shrink-0 w-12 h-12 rounded-xl bg-[#9E98FF] grid place-items-center"
             >
               <Icon name="choose" class="w-5 h-5" />
             </div>
@@ -28,7 +28,7 @@
           <!-- Step 2: Comprehensive Property Configuration -->
           <div class="flex items-start space-x-5">
             <div
-              class="shrink-0 w-12 h-12 rounded-xl bg-[#F15A2B] grid place-items-center"
+              class="shrink-0 w-12 h-12 rounded-xl bg-[#857EFF] grid place-items-center"
             >
               <Icon name="payment" class="w-5 h-5" />
             </div>
@@ -42,7 +42,7 @@
           <!-- Step 3: Seamless Appointment Scheduling -->
           <div class="flex items-start space-x-5">
             <div
-              class="shrink-0 w-12 h-12 rounded-xl bg-[#006380] grid place-items-center"
+              class="shrink-0 w-12 h-12 rounded-xl bg-[#6C63FF] grid place-items-center"
             >
               <Icon name="car" class="w-5 h-5" />
             </div>
@@ -56,11 +56,8 @@
         </div>
       </div>
       <div class="relative">
-        <nuxt-picture
-          src="/images/mobile-app.png"
-          alt="Mobile App"
-          class="w-full h-auto object-cover"
-        />
+        <img src="@/assets/images/booking.png" alt="Property header image"
+          class="w-full h-auto object-cover rounded-lg" />
       </div>
     </div>
   </section>

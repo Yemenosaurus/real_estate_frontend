@@ -49,36 +49,52 @@ const email = ref('a@a.com');
 const password = ref('a');
 const loginSuccess = ref(false);
 
+// Configuration d'axios
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://127.0.0.1:8000';
+axios.defaults.headers.common['Accept'] = 'application/json';
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 function closePopup() {
   emit('close');
 }
 
 async function handleLogin() {
-  // try {
-    await axios.get('http://127.0.0.1:8000/api/sanctum/csrf-cookie');
-    const loginResponse = await axios.post('http://127.0.0.1:8000/api/login', {
+  try {
+    // Récupération du cookie CSRF
+    await axios.get("/sanctum/csrf-cookie");
+    
+    // Tentative de connexion
+    const loginResponse = await axios.post("/api/login", {
       email: email.value,
-      password: password.value
+      password: password.value,
     });
-    console.log('Login successful:', loginResponse.data);
     
-    const userId = loginResponse.data.user.id;
-    localStorage.setItem('userId', userId);
-    
-    const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${userId}`);
-    console.log('User data received:', userResponse.data);
-    
-    emit('userLoggedIn', userResponse.data.user);
-    
-    loginSuccess.value = true;
-    
-    setTimeout(() => {
-      closePopup();
-    }, 1500);
-
-  // } catch (error) {
-  //   console.error('Login failed:', error.response?.data);
-  // }
+    if (loginResponse.data.message === 'Login successful') {
+      // Stocker le token
+      const token = loginResponse.data.token;
+      localStorage.setItem('auth_token', token);
+      
+      // Configurer axios avec le token
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      
+      // Stocker l'ID de l'utilisateur
+      const userId = loginResponse.data.user.id;
+      localStorage.setItem('userId', userId);
+      
+      loginSuccess.value = true;
+      
+      // Émettre l'événement avec les données de l'utilisateur
+      emit('userLoggedIn', loginResponse.data.user);
+      
+      // Fermer le popup après un délai
+      setTimeout(() => {
+        closePopup();
+      }, 1500);
+    }
+  } catch (error) {
+    console.error('Login failed:', error.response?.data);
+  }
 }
 </script>
 

@@ -8,14 +8,13 @@
         <h2 class="font-volkhov font-bold text-5xl text-[#14183E]">
           What People Say About Us.
         </h2>
+        <img src="@/assets/images/testimonial.png" alt="Property header image"
+          class="w-full h-auto object-cover rounded-lg" />
       </div>
       <div class="space-y-8">
         <div class="bg-white rounded-xl p-8 shadow-lg">
-          <nuxt-picture
-            src="/images/testimonial.jpg"
-            alt="Testimonial 1"
-            class="w-16 h-16 rounded-full object-cover"
-          />
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mike Taylor" 
+            class="w-12 h-12 rounded-full object-cover ring-2 ring-[#6C63FF] ring-offset-2" />
           <p class="mt-8 text-[#5E6282] text-base">
             "On the Windows talking painted pasture yet its express parties use.
             Sure last upon he same as knew next. Of believed or diverted no."
@@ -26,11 +25,8 @@
           </div>
         </div>
         <div class="bg-white rounded-xl p-8 shadow-lg">
-          <nuxt-picture
-            src="/images/testimonial2.jpg"
-            alt="Testimonial 2"
-            class="w-16 h-16 rounded-full object-cover"
-          />
+          <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Chris Thomas" 
+            class="w-12 h-12 rounded-full object-cover ring-2 ring-[#6C63FF] ring-offset-2" />
           <p class="mt-8 text-[#5E6282] text-base">
             "On the Windows talking painted pasture yet its express parties use.
             Sure last upon he same as knew next. Of believed or diverted no."
@@ -43,4 +39,4 @@
       </div>
     </div>
   </section>
-</template> 
+</template>

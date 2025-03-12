@@ -6,8 +6,6 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxtjs/tailwindcss",
     "@nuxt/image",
-    "@nuxt/fonts",
-
   ],
 
   runtimeConfig: {
@@ -16,23 +14,36 @@ export default defineNuxtConfig({
     },
   },
 
+  app: {
+    head: {
+      title: 'Real Estate',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+      ]
+    }
+  },
+
   devtools: {
     enabled: true,
   },
 
   colorMode: {
+    preference: 'light',
+    fallback: 'light',
     disableTransition: true,
   },
 
   ui: {
     safelistColors: ["primary", "red", "orange", "green"],
+    primary: 'indigo',
   },
 
   routeRules: {
     // "/": { redirect: '/login' },
   },
 
-  ssr: true,
+  ssr: false,
 
   future: {
     compatibilityVersion: 4,
@@ -42,6 +53,7 @@ export default defineNuxtConfig({
 
   typescript: {
     strict: false,
+    typeCheck: false
   },
 
   tailwindcss: {
