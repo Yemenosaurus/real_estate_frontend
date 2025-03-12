@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useDashboard } from "@/composables/useDashboard";
 import axios from "axios";
 import Logo from "~/components/global/Logo.vue";
@@ -9,9 +9,11 @@ import Logo from "~/components/global/Logo.vue";
 // Gestion de l'authentification
 // ------------------
 const isAuthenticated = ref(false);
+const isLoading = ref(true);
 const email = ref("a@a.com");
 const password = ref("a");
 const loginSuccess = ref(false);
+const router = useRouter();
 
 async function handleLogin() {
   try {
@@ -27,6 +29,7 @@ async function handleLogin() {
     console.log("User data received:", userResponse.data);
     loginSuccess.value = true;
     isAuthenticated.value = true;
+    router.push('/');
   } catch (error) {
     console.error("Login failed:", error.response?.data);
   }
@@ -34,24 +37,37 @@ async function handleLogin() {
 
 // Vérifier au montage si l'utilisateur est déjà connecté
 onMounted(async () => {
+  isLoading.value = true;
   const userId = localStorage.getItem("userId");
   if (userId) {
     try {
       const userResponse = await axios.get(`http://127.0.0.1:8000/api/user/${userId}`);
       console.log("User data received on mount:", userResponse.data);
       isAuthenticated.value = true;
+      if (window.location.pathname === '/login') {
+        router.push('/');
+      }
     } catch (error) {
       console.error("Session invalide ou expirée:", error);
       isAuthenticated.value = false;
       localStorage.removeItem("userId");
+      if (window.location.pathname !== '/login') {
+        router.push('/login');
+      }
+    }
+  } else {
+    if (window.location.pathname !== '/login') {
+      router.push('/login');
     }
   }
+  isLoading.value = false;
 });
 
 // Fonction de logout
 function logout() {
   localStorage.removeItem("userId");
   isAuthenticated.value = false;
+  router.push('/login');
 }
 
 // ------------------
@@ -163,8 +179,18 @@ const groups = [
 
 <template>
   <div>
+    <!-- Écran de chargement -->
+    <template v-if="isLoading">
+      <div class="flex items-center justify-center min-h-screen bg-gray-100">
+        <div class="text-center">
+          <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-indigo-600 mx-auto"></div>
+          <p class="mt-4 text-xl font-semibold text-gray-700">Chargement...</p>
+        </div>
+      </div>
+    </template>
+
     <!-- Si l'utilisateur est authentifié, on affiche le dashboard complet -->
-    <template v-if="isAuthenticated">
+    <template v-else-if="isAuthenticated">
       <UDashboardLayout>
         <UDashboardPanel :width="250" :resizable="{ min: 200, max: 300 }" collapsible>
           <UDashboardNavbar class="!border-transparent" :ui="{ left: 'flex-1' }">
@@ -216,7 +242,7 @@ const groups = [
       </UDashboardLayout>
     </template>
 
-    <!-- Sinon, on affiche la vue de login inspirée de votre composant -->
+    <!-- Sinon, on affiche la vue de login -->
     <template v-else>
       <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
         <div class="bg-white rounded-lg shadow-lg flex w-3/4 max-w-3xl">
