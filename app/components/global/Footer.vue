@@ -3,8 +3,8 @@
     <div class="w-full text-center p-12 sm:p-0 space-y-4 sm:space-y-0 sm:grid sm:grid-cols-10 gap-20 md:gap-12 lg:gap-20">
       <!-- Logo et description -->
       <div class="col-span-2 space-y-3">
-        <NuxtLink to="/" class="text-[#181E4B] font-medium text-5xl">Corevia Estate</NuxtLink>
-        <p class="text-[#080809] text-xs font-light">
+        <NuxtLink to="/" class="text-white font-medium text-5xl">Corevia Estate</NuxtLink>
+        <p class="text-white text-xs font-light">
           Corevia Estate est une plateforme de gestion d'états des lieuxs de propriétés immobilières.
         </p>
       </div>
@@ -73,9 +73,9 @@
     </div>
 
     <!-- Copyright -->
-    <p class="text-center text-xs text-[#5E6282] mb-8 sm:mt-8">
+    <!-- <p class="text-center text-xs text-[#5E6282] mb-8 sm:mt-8">
       <NuxtLink to="https://the-coding-montana.vercel.app" class="text-indigo-600">The Coding Montana</NuxtLink>
-    </p>
+    </p> -->
   </footer>
 </template>
 

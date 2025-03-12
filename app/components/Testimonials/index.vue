@@ -13,7 +13,8 @@
       </div>
       <div class="space-y-8">
         <div class="bg-white rounded-xl p-8 shadow-lg">
-          <nuxt-picture src="/images/testimonial.jpg" alt="Testimonial 1" class="w-16 h-16 rounded-full object-cover" />
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mike Taylor" 
+            class="w-12 h-12 rounded-full object-cover ring-2 ring-[#6C63FF] ring-offset-2" />
           <p class="mt-8 text-[#5E6282] text-base">
             "On the Windows talking painted pasture yet its express parties use.
             Sure last upon he same as knew next. Of believed or diverted no."
@@ -24,8 +25,8 @@
           </div>
         </div>
         <div class="bg-white rounded-xl p-8 shadow-lg">
-          <nuxt-picture src="/images/testimonial2.jpg" alt="Testimonial 2"
-            class="w-16 h-16 rounded-full object-cover" />
+          <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Chris Thomas" 
+            class="w-12 h-12 rounded-full object-cover ring-2 ring-[#6C63FF] ring-offset-2" />
           <p class="mt-8 text-[#5E6282] text-base">
             "On the Windows talking painted pasture yet its express parties use.
             Sure last upon he same as knew next. Of believed or diverted no."

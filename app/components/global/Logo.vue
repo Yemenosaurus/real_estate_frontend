@@ -1,5 +1,14 @@
+<script setup>
+defineProps({
+  hasScrolled: {
+    type: Boolean,
+    default: false
+  }
+});
+</script>
+
 <template>
-  <NuxtLink to="/visitor/home" class="text-[#181E4B] font-medium text-3xl">
+  <NuxtLink to="/visitor/home" :class="['font-medium text-3xl transition-colors duration-300', hasScrolled ? 'text-white' : 'text-[#181E4B]']">
     Corevia Estate
   </NuxtLink>
 </template>

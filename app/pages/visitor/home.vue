@@ -16,7 +16,7 @@
     <Form />
     <Bookings />
     <Testimonials />
-    <Companies />
+    <!-- <Companies /> -->
     <Subscribe />
   </div>
 </template>
