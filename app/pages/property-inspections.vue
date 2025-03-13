@@ -341,6 +341,7 @@ const setRoomQuantity = (room: string, category: string, value: number) => {
   roomQuantities.value[category][room] = Number(value);
 };
 
+
 // ----- Estate selection -----
 const isEstateSelectionModalOpen = ref(false);
 const selectedEstateForInspection = ref<Estate | null>(null);
