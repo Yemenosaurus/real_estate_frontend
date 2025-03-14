@@ -364,7 +364,6 @@ onMounted(() => {
         <template #left>
           <!-- ~/components/home/HomeDateRangePicker.vue -->
           <HomeDateRangePicker v-model="range" class="-ml-2.5" />
-
           <!-- ~/components/home/HomePeriodSelect.vue -->
           <HomePeriodSelect v-model="period" :range="range" />
         </template>
@@ -386,7 +385,7 @@ onMounted(() => {
                 <h3
                   class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
                 >
-                  Répartition des inspections par statut
+                  Répartition des inspections par statut 
                 </h3>
               </div>
             </template>
